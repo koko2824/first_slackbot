@@ -2,6 +2,8 @@ package main
 
 import (
 	"first_slackbot/slack"
+	"fmt"
+	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 	"log"
 )
@@ -11,5 +13,12 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	slack.SendMessageToKoko("hello world")
+
+	r := gin.Default()
+	r.POST("/msg", func(c *gin.Context) {
+		text := c.PostForm("msg")
+		msg := fmt.Sprintf("<@UTV82PCN7> %s", text )
+		slack.SendMessageToKoko(msg)
+	})
+	r.Run("localhost:8080")
 }

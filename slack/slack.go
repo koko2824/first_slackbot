@@ -29,7 +29,6 @@ func sendMessage(text string, url string, method string) {
 	if err != nil {
 		log.Fatal(err)
 	}
-
 	client := new(http.Client)
 	resp, err := client.Do(req)
 	if err != nil {
